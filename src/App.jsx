@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import "./App.css";
 import ShowData from "./components/ShowData";
+import "./App.css";
 
 export default function App() {
   const [arrayOfUsers, setArrayOfUsers] = useState([]);
@@ -18,16 +18,30 @@ export default function App() {
   };
   // console.log(errors);
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form className="container d flex row" onSubmit={handleSubmit(onSubmit)}>
       {arrayOfUsers
         ? arrayOfUsers.map((m) => (
             <ShowData key={m.id} firstName={m.firstName} />
           ))
         : ""}
-      <input {...register("firstName", { required: true, maxLength: 20 })} />
-      <input {...register("lastName", { pattern: /^[A-Za-z]+$/i })} />
-      <input type="number" {...register("age", { min: 18, max: 99 })} />
-      <input type="submit" />
+      <input
+        className="m-1"
+        {...register("firstName", { required: true, maxLength: 20 })}
+      />
+      <input
+        className="m-1"
+        {...register("lastName", { pattern: /^[A-Za-z]+$/i })}
+      />
+      <input
+        className="m-1"
+        type="number"
+        {...register("age", { min: 18, max: 99 })}
+      />
+      <input
+        className="m-1"
+        {...register("address", { required: true, maxLength: 20 })}
+      />
+      <input className="m-1 btn btn-success" type="submit" />
     </form>
   );
 }
