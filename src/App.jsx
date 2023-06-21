@@ -16,26 +16,37 @@ export default function App() {
     console.log(newData);
     setArrayOfUsers([...arrayOfUsers, newData]);
   };
-  // console.log(errors);
+console.log(errors)
   return (
     <form className="container d flex row" onSubmit={handleSubmit(onSubmit)}>
       {arrayOfUsers
         ? arrayOfUsers.map((m) => (
-            <ShowData key={m.id} firstName={m.firstName} />
+            <ShowData
+              key={m.id}
+              id={m.id}
+              firstName={m.firstName}
+              lastName={m.lastName}
+              age={m.age}
+              address={m.address}
+            />
           ))
         : ""}
       <input
         className="m-1"
-        {...register("firstName", { required: true, maxLength: 20 })}
+        {...register("firstName", {
+          required: true,
+          maxLength: 20,
+        })}
       />
+      <p>{errors.firstName?.type}</p>
       <input
         className="m-1"
-        {...register("lastName", { pattern: /^[A-Za-z]+$/i })}
+        {...register("lastName", { required: true, pattern: /^[A-Za-z]+$/i })}
       />
       <input
         className="m-1"
         type="number"
-        {...register("age", { min: 18, max: 99 })}
+        {...register("age", { required: true, min: 18, max: 99 })}
       />
       <input
         className="m-1"
